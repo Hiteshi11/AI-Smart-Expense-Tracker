@@ -70,36 +70,27 @@ if uploaded_file is not None:
 
     if total_amount:
 
-        amount = float(total_amount)
+    amount = float(total_amount)
 
-        st.success(f"Detected Total: ₹{amount}")
+    st.success(f"Detected Total: ₹{amount}")
 
-        description = "receipt expense"
+    description = "receipt expense"
 
-        test = vectorizer.transform([description])
-        predicted_category = model.predict(test)[0]
+    test = vectorizer.transform([description])
+    predicted_category = model.predict(test)[0]
 
-        st.write("Predicted Category:", predicted_category)
+    st.write("Predicted Category:", predicted_category)
 
-        # Save automatically
-        file_path = "ai_expense_tracker/data/expense_log.csv"
+    date = datetime.today().strftime('%Y-%m-%d')
 
-        if not os.path.exists(file_path):
-            df = pd.DataFrame(columns=["date","amount","category"])
-            df.to_csv(file_path, index=False)
+    cursor.execute(
+        "INSERT INTO expenses VALUES (?, ?, ?)",
+        (date, amount, predicted_category)
+    )
 
-        df = pd.read_csv(file_path)
+    conn.commit()
 
-        new_expense = pd.DataFrame(
-            [[datetime.today().strftime('%Y-%m-%d'), amount, predicted_category]],
-            columns=["date","amount","category"]
-        )
-
-        df = pd.concat([df, new_expense], ignore_index=True)
-
-        df.to_csv(file_path, index=False)
-
-        st.success("Expense automatically saved!")
+    st.success("Receipt expense saved in database!")
         
 
 # -------- EXPENSE INPUT --------
@@ -177,6 +168,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
