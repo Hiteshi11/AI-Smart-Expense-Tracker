@@ -116,7 +116,7 @@ if len(df) > 0:
 
     category_totals = df.groupby("category")["amount"].sum()
 
-    fig, ax = plt.subplots(figsize=(4,4)
+    fig, ax = plt.subplots(figsize=(4,4))
 
     ax.pie(
         category_totals,
@@ -131,4 +131,5 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
