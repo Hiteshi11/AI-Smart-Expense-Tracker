@@ -6,6 +6,7 @@ import cv2
 from datetime import datetime
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
+import os
 
 data = pd.read_csv("ai_expense_tracker/data/expenses.csv")
 
@@ -78,7 +79,15 @@ if st.button("Save Expense"):
         columns=["date","amount","category"]
     )
     
-    df = pd.read_csv("data/expense_log.csv")
+  
+
+file_path = "ai_expense_tracker/data/expense_log.csv"
+
+if not os.path.exists(file_path):
+    df = pd.DataFrame(columns=["date", "amount", "category"])
+    df.to_csv(file_path, index=False)
+
+df = pd.read_csv(file_path)
     
     df = pd.concat([df,new_expense], ignore_index=True)
     
@@ -103,4 +112,5 @@ st.subheader("Category Distribution")
 st.write(category_sum.plot.pie(autopct='%1.1f%%'))
 
 st.dataframe(df)
+
 
