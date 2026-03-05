@@ -34,7 +34,7 @@ st.markdown("---")
 st.write("Track your expenses with AI-powered receipt scanning.")
 
 # -------- TRAIN CATEGORY MODEL --------
-data = pd.read_csv("data/expenses.csv")
+data = pd.read_csv("ai_expense_tracker/data/expenses.csv")
 X = data["text"]
 y = data["category"]
 
@@ -171,6 +171,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
