@@ -8,6 +8,15 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import os
 
+st.set_page_config(
+    page_title="AI Smart Expense Tracker",
+    page_icon="💰",
+    layout="wide"
+)
+
+st.title("💰 AI Smart Expense Tracker")
+st.write("Track your expenses with AI-powered receipt scanning.")
+
 data = pd.read_csv("ai_expense_tracker/data/expenses.csv")
 
 X = data["text"]
@@ -63,12 +72,16 @@ if description:
     
     st.write("Predicted Category:", predicted_category)
 
-amount = st.number_input("Enter amount", min_value=0.0)
+col1, col2 = st.columns(2)
 
-category = st.selectbox(
-    "Select category",
-    ["food", "transport", "shopping", "entertainment"]
-)
+with col1:
+    amount = st.number_input("Enter Amount")
+
+with col2:
+    category = st.selectbox(
+        "Select Category",
+        ["Food", "Transport", "Shopping", "Entertainment", "Bills", "Other"]
+    )
 
 if st.button("Save Expense"):
 
@@ -88,13 +101,33 @@ if st.button("Save Expense"):
 
     df = pd.read_csv(file_path)
 
+    import matplotlib.pyplot as plt
+
+    st.header("📊 Expense Distribution")
+
+   category_totals = df.groupby("category")["amount"].sum()
+
+   fig, ax = plt.subplots()
+
+   ax.pie(
+    category_totals,
+    labels=category_totals.index,
+    autopct="%1.1f%%",
+    startangle=90
+  )
+
+   ax.axis("equal")
+
+  st.pyplot(fig)
+
     df = pd.concat([df, new_expense], ignore_index=True)
 
     df.to_csv(file_path, index=False)
 
     st.success("Expense Saved!")
 
-st.header("Expense History")
+st.header("📜 Expense History")
+st.dataframe(df)
 
 df = pd.read_csv("ai_expense_tracker/data/expense_log.csv")
 st.header("Expense Analysis")
@@ -110,6 +143,7 @@ st.subheader("Category Distribution")
 st.write(category_sum.plot.pie(autopct='%1.1f%%'))
 
 st.dataframe(df)
+
 
 
 
