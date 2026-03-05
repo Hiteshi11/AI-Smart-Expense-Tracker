@@ -105,20 +105,20 @@ if st.button("Save Expense"):
 
     st.header("📊 Expense Distribution")
 
-   category_totals = df.groupby("category")["amount"].sum()
+    category_totals = df.groupby("category")["amount"].sum()
 
-   fig, ax = plt.subplots()
+    fig, ax = plt.subplots()
 
-   ax.pie(
-    category_totals,
-    labels=category_totals.index,
-    autopct="%1.1f%%",
-    startangle=90
+    ax.pie(
+     category_totals,
+     labels=category_totals.index,
+     autopct="%1.1f%%",
+     startangle=90
   )
 
-   ax.axis("equal")
+    ax.axis("equal")
 
-  st.pyplot(fig)
+    st.pyplot(fig)
 
     df = pd.concat([df, new_expense], ignore_index=True)
 
@@ -143,6 +143,7 @@ st.subheader("Category Distribution")
 st.write(category_sum.plot.pie(autopct='%1.1f%%'))
 
 st.dataframe(df)
+
 
 
 
