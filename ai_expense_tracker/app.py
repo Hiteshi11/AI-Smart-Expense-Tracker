@@ -116,21 +116,26 @@ if len(df) > 0:
 
     category_totals = df.groupby("category")["amount"].sum()
 
-    fig, ax = plt.subplots(figsize=(2,2))
+    col1, col2, col3 = st.columns([1,2,1])
 
-    ax.pie(
-        category_totals,
-        labels=category_totals.index,
-        autopct="%1.1f%%",
-        startangle=90
-    )
+    with col2:  # center column
 
-    ax.axis("equal")
+        fig, ax = plt.subplots(figsize=(3,3))
 
-    st.pyplot(fig)
+        ax.pie(
+            category_totals,
+            labels=category_totals.index,
+            autopct="%1.1f%%",
+            startangle=90
+        )
+
+        ax.axis("equal")
+
+        st.pyplot(fig)
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
