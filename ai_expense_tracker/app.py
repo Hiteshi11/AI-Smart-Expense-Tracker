@@ -72,9 +72,9 @@ category = st.selectbox(
 
 if st.button("Save Expense"):
     
-    date = datetime.today().strftime('%Y-%m-%d')
+     date = datetime.today().strftime('%Y-%m-%d')
     
-    new_expense = pd.DataFrame(
+     new_expense = pd.DataFrame(
         [[date, amount, category]],
         columns=["date","amount","category"]
     )
@@ -95,7 +95,7 @@ df = pd.concat([df, new_expense], ignore_index=True)
 
 df.to_csv(file_path, index=False)
     
-    st.success("Expense Saved!")
+st.success("Expense Saved!")
 
 st.header("Expense History")
 
@@ -114,6 +114,7 @@ st.subheader("Category Distribution")
 st.write(category_sum.plot.pie(autopct='%1.1f%%'))
 
 st.dataframe(df)
+
 
 
 
