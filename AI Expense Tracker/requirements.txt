@@ -1,7 +1,8 @@
 streamlit
 pandas
-easyocr
-opencv-python
 numpy
+opencv-python-headless
 scikit-learn
 matplotlib
+easyocr
+torch
