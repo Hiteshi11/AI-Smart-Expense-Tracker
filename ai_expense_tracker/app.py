@@ -8,6 +8,20 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
 import os
+import sqlite3
+
+conn = sqlite3.connect("expenses.db", check_same_thread=False)
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS expenses (
+    date TEXT,
+    amount REAL,
+    category TEXT
+)
+""")
+
+conn.commit()
 
 st.set_page_config(
     page_title="AI Smart Expense Tracker",
@@ -121,21 +135,17 @@ if st.button("Save Expense"):
 
     date = datetime.today().strftime('%Y-%m-%d')
 
-    new_expense = pd.DataFrame(
-        [[date, amount, category]],
-        columns=["date", "amount", "category"]
+    cursor.execute(
+        "INSERT INTO expenses VALUES (?, ?, ?)",
+        (date, amount, category)
     )
 
-    df = pd.read_csv(file_path)
-
-    df = pd.concat([df, new_expense], ignore_index=True)
-
-    df.to_csv(file_path, index=False)
+    conn.commit()
 
     st.success("Expense Saved!")
 
 # -------- LOAD DATA --------
-df = pd.read_csv(file_path)
+df = pd.read_sql_query("SELECT * FROM expenses", conn)
 
 # -------- EXPENSE HISTORY --------
 st.header("📜 Expense History")
@@ -167,6 +177,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
