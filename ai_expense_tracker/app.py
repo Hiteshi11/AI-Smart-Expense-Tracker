@@ -7,7 +7,7 @@ from datetime import datetime
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
-data = pd.read_csv("data/expenses.csv")
+data = pd.read_csv("ai_expense_tracker/data/expenses.csv")
 
 X = data["text"]
 y = data["category"]
@@ -103,3 +103,4 @@ st.subheader("Category Distribution")
 st.write(category_sum.plot.pie(autopct='%1.1f%%'))
 
 st.dataframe(df)
+
