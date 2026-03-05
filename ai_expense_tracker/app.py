@@ -31,6 +31,7 @@ model = LogisticRegression()
 model.fit(X_vector, y)
 
 # -------- RECEIPT SCANNER --------
+total_amount = None
 st.header("Upload Receipt")
 
 uploaded_file = st.file_uploader("Upload receipt image", type=["jpg","png","jpeg"])
@@ -54,7 +55,38 @@ if uploaded_file is not None:
                 break
 
     if total_amount:
-        st.success(f"Detected Total: {total_amount}")
+
+        amount = float(total_amount)
+
+        st.success(f"Detected Total: ₹{amount}")
+
+        description = "receipt expense"
+
+        test = vectorizer.transform([description])
+        predicted_category = model.predict(test)[0]
+
+        st.write("Predicted Category:", predicted_category)
+
+        # Save automatically
+        file_path = "ai_expense_tracker/data/expense_log.csv"
+
+        if not os.path.exists(file_path):
+            df = pd.DataFrame(columns=["date","amount","category"])
+            df.to_csv(file_path, index=False)
+
+        df = pd.read_csv(file_path)
+
+        new_expense = pd.DataFrame(
+            [[datetime.today().strftime('%Y-%m-%d'), amount, predicted_category]],
+            columns=["date","amount","category"]
+        )
+
+        df = pd.concat([df, new_expense], ignore_index=True)
+
+        df.to_csv(file_path, index=False)
+
+        st.success("Expense automatically saved!")
+        
 
 # -------- EXPENSE INPUT --------
 st.header("Add Expense")
@@ -135,6 +167,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
