@@ -30,11 +30,11 @@ st.set_page_config(
 )
 
 st.title("💰 AI Smart Expense Tracker")
+st.markdown("---")
 st.write("Track your expenses with AI-powered receipt scanning.")
 
 # -------- TRAIN CATEGORY MODEL --------
-data = pd.read_csv("ai_expense_tracker/data/expenses.csv")
-
+data = pd.read_csv("data/expenses.csv")
 X = data["text"]
 y = data["category"]
 
@@ -45,7 +45,6 @@ model = LogisticRegression()
 model.fit(X_vector, y)
 
 # -------- RECEIPT SCANNER --------
-total_amount = None
 st.header("Upload Receipt")
 
 uploaded_file = st.file_uploader("Upload receipt image", type=["jpg","png","jpeg"])
@@ -70,28 +69,32 @@ if uploaded_file is not None:
 
     if total_amount:
 
-     amount = float(total_amount)
+        try:
+            amount = float(total_amount.replace("₹","").replace(",",""))
+        except:
+            amount = 0
 
-     st.success(f"Detected Total: ₹{amount}")
+        st.success(f"Detected Total: ₹{amount}")
 
-     description = "receipt expense"
+        description = "receipt expense"
 
-    test = vectorizer.transform([description])
-    predicted_category = model.predict(test)[0]
+        test = vectorizer.transform([description])
+        predicted_category = model.predict(test)[0]
 
-    st.write("Predicted Category:", predicted_category)
+        st.write("Predicted Category:", predicted_category)
 
-    date = datetime.today().strftime('%Y-%m-%d')
+        if st.button("Save Receipt Expense"):
 
-    cursor.execute(
-        "INSERT INTO expenses VALUES (?, ?, ?)",
-        (date, amount, predicted_category)
-    )
+            date = datetime.today().strftime('%Y-%m-%d')
 
-    conn.commit()
+            cursor.execute(
+                "INSERT INTO expenses VALUES (?, ?, ?)",
+                (date, amount, predicted_category)
+            )
 
-    st.success("Receipt expense saved in database!")
-        
+            conn.commit()
+
+            st.success("Receipt expense saved!")
 
 # -------- EXPENSE INPUT --------
 st.header("Add Expense")
@@ -168,6 +171,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
