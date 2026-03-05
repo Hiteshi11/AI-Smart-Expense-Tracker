@@ -1,0 +1,1 @@
+print("AI Expense Tracker Setup Successful 🚀")

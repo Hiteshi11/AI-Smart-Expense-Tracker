@@ -1,0 +1,16 @@
+text,category
+uber ride,transport
+ola ride,transport
+bus ticket,transport
+train ticket,transport
+pizza order,food
+restaurant dinner,food
+coffee starbucks,food
+burger meal,food
+amazon purchase,shopping
+flipkart order,shopping
+clothes shopping,shopping
+grocery store,shopping
+movie ticket,entertainment
+netflix subscription,entertainment
+spotify subscription,entertainment
