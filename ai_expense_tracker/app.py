@@ -81,6 +81,8 @@ if st.button("Save Expense"):
     
   
 
+
+
 file_path = "ai_expense_tracker/data/expense_log.csv"
 
 if not os.path.exists(file_path):
@@ -88,10 +90,10 @@ if not os.path.exists(file_path):
     df.to_csv(file_path, index=False)
 
 df = pd.read_csv(file_path)
-    
-    df = pd.concat([df,new_expense], ignore_index=True)
-    
-    df.to_csv("data/expense_log.csv", index=False)
+
+df = pd.concat([df, new_expense], ignore_index=True)
+
+df.to_csv(file_path, index=False)
     
     st.success("Expense Saved!")
 
@@ -112,5 +114,6 @@ st.subheader("Category Distribution")
 st.write(category_sum.plot.pie(autopct='%1.1f%%'))
 
 st.dataframe(df)
+
 
 
