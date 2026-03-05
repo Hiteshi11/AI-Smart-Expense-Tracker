@@ -70,11 +70,11 @@ if uploaded_file is not None:
 
     if total_amount:
 
-    amount = float(total_amount)
+     amount = float(total_amount)
 
-    st.success(f"Detected Total: ₹{amount}")
+     st.success(f"Detected Total: ₹{amount}")
 
-    description = "receipt expense"
+     description = "receipt expense"
 
     test = vectorizer.transform([description])
     predicted_category = model.predict(test)[0]
@@ -168,6 +168,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
