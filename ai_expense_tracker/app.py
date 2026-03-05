@@ -127,6 +127,14 @@ if st.button("Save Expense"):
     st.success("Expense Saved!")
 
 st.header("📜 Expense History")
+file_path = "ai_expense_tracker/data/expense_log.csv"
+
+if not os.path.exists(file_path):
+    df = pd.DataFrame(columns=["date","amount","category"])
+    df.to_csv(file_path, index=False)
+
+df = pd.read_csv(file_path)
+
 st.dataframe(df)
 
 df = pd.read_csv("ai_expense_tracker/data/expense_log.csv")
@@ -143,6 +151,7 @@ st.subheader("Category Distribution")
 st.write(category_sum.plot.pie(autopct='%1.1f%%'))
 
 st.dataframe(df)
+
 
 
 
