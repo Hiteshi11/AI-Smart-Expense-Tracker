@@ -71,30 +71,28 @@ category = st.selectbox(
 )
 
 if st.button("Save Expense"):
-    
-     date = datetime.today().strftime('%Y-%m-%d')
-    
-     new_expense = pd.DataFrame(
+
+    date = datetime.today().strftime('%Y-%m-%d')
+
+    new_expense = pd.DataFrame(
         [[date, amount, category]],
-        columns=["date","amount","category"]
+        columns=["date", "amount", "category"]
     )
-    
-  
 
+    import os
+    file_path = "ai_expense_tracker/data/expense_log.csv"
 
+    if not os.path.exists(file_path):
+        df = pd.DataFrame(columns=["date", "amount", "category"])
+        df.to_csv(file_path, index=False)
 
-file_path = "ai_expense_tracker/data/expense_log.csv"
+    df = pd.read_csv(file_path)
 
-if not os.path.exists(file_path):
-    df = pd.DataFrame(columns=["date", "amount", "category"])
+    df = pd.concat([df, new_expense], ignore_index=True)
+
     df.to_csv(file_path, index=False)
 
-df = pd.read_csv(file_path)
-df = pd.concat([df, new_expense], ignore_index=True)
-
-df.to_csv(file_path, index=False)
-    
-st.success("Expense Saved!")
+    st.success("Expense Saved!")
 
 st.header("Expense History")
 
@@ -113,6 +111,7 @@ st.subheader("Category Distribution")
 st.write(category_sum.plot.pie(autopct='%1.1f%%'))
 
 st.dataframe(df)
+
 
 
 
