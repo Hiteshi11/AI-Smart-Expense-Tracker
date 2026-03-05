@@ -96,8 +96,7 @@ if st.button("Save Expense"):
 
 st.header("Expense History")
 
-df = pd.read_csv("data/expense_log.csv")
-
+df = pd.read_csv("ai_expense_tracker/data/expense_log.csv")
 st.header("Expense Analysis")
 
 # spending by category
@@ -111,6 +110,7 @@ st.subheader("Category Distribution")
 st.write(category_sum.plot.pie(autopct='%1.1f%%'))
 
 st.dataframe(df)
+
 
 
 
