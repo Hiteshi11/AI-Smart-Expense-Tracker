@@ -169,11 +169,18 @@ col2.metric("🧾 Transactions", total_transactions)
 col3.metric("🏆 Top Category", top_category)
 
 if len(df) > 0:
-    df["date"] = pd.to_datetime(df["date"])
+    st.subheader("📅 Monthly Spending")
+
+if len(df) > 0:
+
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+
     monthly = df.groupby(df["date"].dt.month)["amount"].sum()
 
-    st.subheader("📅 Monthly Spending")
     st.line_chart(monthly)
+
+else:
+    st.info("No expense data available yet.")
 
 st.subheader("📅 Monthly Spending")
 
@@ -232,6 +239,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
