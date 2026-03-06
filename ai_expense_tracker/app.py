@@ -181,9 +181,6 @@ if len(df) > 0:
 else:
     st.info("No expense data available yet.")
 
-st.subheader("📅 Monthly Spending")
-
-st.line_chart(monthly)
 
 st.subheader("🔍 Filter Expenses")
 
@@ -238,6 +235,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
