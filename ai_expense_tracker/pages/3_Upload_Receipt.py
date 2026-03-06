@@ -8,6 +8,16 @@ from datetime import datetime
 conn = sqlite3.connect("expenses.db", check_same_thread=False)
 cursor = conn.cursor()
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS expenses (
+    date TEXT,
+    amount REAL,
+    category TEXT
+)
+""")
+
+conn.commit()
+
 st.title("📷 Upload Receipt")
 
 uploaded_file = st.file_uploader("Upload receipt image", type=["jpg","png","jpeg"])
