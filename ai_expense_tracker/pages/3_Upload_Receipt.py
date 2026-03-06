@@ -1,5 +1,5 @@
 import streamlit as st
-import easyocr
+from utils.ocr_reader import get_ocr_reader
 import numpy as np
 import cv2
 import sqlite3
@@ -27,7 +27,7 @@ if uploaded_file is not None:
     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
     image = cv2.imdecode(file_bytes, 1)
 
-    reader = easyocr.Reader(['en'])
+    reader = get_ocr_reader()
     results = reader.readtext(image)
 
     text_list = [detection[1] for detection in results]
