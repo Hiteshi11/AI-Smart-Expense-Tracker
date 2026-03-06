@@ -147,16 +147,14 @@ if st.button("Save Expense"):
 
 df = pd.read_sql_query("SELECT * FROM expenses", conn)
 
-if len(df) > 0:
+st.markdown("### 📊 Dashboard Overview")
 
+if len(df) > 0:
     df["amount"] = pd.to_numeric(df["amount"], errors="coerce")
 
     total_spent = df["amount"].sum()
     total_transactions = len(df)
-
-    category_sum = df.groupby("category")["amount"].sum()
-    top_category = category_sum.idxmax()
-
+    top_category = df.groupby("category")["amount"].sum().idxmax()
 else:
     total_spent = 0
     total_transactions = 0
@@ -168,18 +166,17 @@ col1.metric("💰 Total Spending", f"₹{total_spent}")
 col2.metric("🧾 Transactions", total_transactions)
 col3.metric("🏆 Top Category", top_category)
 
-st.subheader("📅 Monthly Spending")
+if st.button("Show Monthly Spending Chart"):
 
-if len(df) > 0:
+    if len(df) > 0:
 
-    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+        monthly = df.groupby(df["date"].dt.month)["amount"].sum()
 
-    monthly = df.groupby(df["date"].dt.month)["amount"].sum()
+        st.line_chart(monthly)
 
-    st.line_chart(monthly)
-
-else:
-    st.info("No expense data available yet.")
+    else:
+        st.info("No expense data available yet.")
 
 
 st.subheader("🔍 Filter Expenses")
@@ -210,17 +207,15 @@ st.header("📜 Expense History")
 st.dataframe(df)
 
 # -------- PIE CHART --------
-st.header("📊 Expense Distribution")
+st.markdown("### 📈 Visual Insights")
 
-if len(df) > 0:
+if st.button("Show Expense Distribution Pie Chart"):
 
-    category_totals = df.groupby("category")["amount"].sum()
+    if len(df) > 0:
 
-    col1, col2, col3 = st.columns([1,2,1])
+        category_totals = df.groupby("category")["amount"].sum()
 
-    with col2:  # center column
-
-        fig, ax = plt.subplots(figsize=(3,3))
+        fig, ax = plt.subplots(figsize=(4,4))
 
         ax.pie(
             category_totals,
@@ -233,9 +228,8 @@ if len(df) > 0:
 
         st.pyplot(fig)
 
-else:
-    st.info("No expenses recorded yet.")
-
+    else:
+        st.info("No expenses recorded yet.")
 
 
 
