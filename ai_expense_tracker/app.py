@@ -44,6 +44,12 @@ X_vector = vectorizer.fit_transform(X)
 model = LogisticRegression()
 model.fit(X_vector, y)
 
+
+@st.cache_resource
+def load_ocr():
+    return easyocr.Reader(['en'])
+
+reader = load_ocr()
 # -------- RECEIPT SCANNER --------
 st.header("Upload Receipt")
 
@@ -54,7 +60,6 @@ if uploaded_file is not None:
     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
     image = cv2.imdecode(file_bytes, 1)
 
-    reader = easyocr.Reader(['en'])
     results = reader.readtext(image)
 
     text_list = [detection[1] for detection in results]
@@ -139,11 +144,23 @@ if st.button("Save Expense"):
     st.success("Expense Saved!")
 
 # -------- LOAD DATA --------
+
 df = pd.read_sql_query("SELECT * FROM expenses", conn)
 
-total_spent = df["amount"].sum()
-total_transactions = len(df)
-top_category = df.groupby("category")["amount"].sum().idxmax()
+if len(df) > 0:
+
+    df["amount"] = pd.to_numeric(df["amount"], errors="coerce")
+
+    total_spent = df["amount"].sum()
+    total_transactions = len(df)
+
+    category_sum = df.groupby("category")["amount"].sum()
+    top_category = category_sum.idxmax()
+
+else:
+    total_spent = 0
+    total_transactions = 0
+    top_category = "No Data"
 
 col1, col2, col3 = st.columns(3)
 
@@ -151,8 +168,12 @@ col1.metric("💰 Total Spending", f"₹{total_spent}")
 col2.metric("🧾 Transactions", total_transactions)
 col3.metric("🏆 Top Category", top_category)
 
-df["date"] = pd.to_datetime(df["date"])
-monthly = df.groupby(df["date"].dt.month)["amount"].sum()
+if len(df) > 0:
+    df["date"] = pd.to_datetime(df["date"])
+    monthly = df.groupby(df["date"].dt.month)["amount"].sum()
+
+    st.subheader("📅 Monthly Spending")
+    st.line_chart(monthly)
 
 st.subheader("📅 Monthly Spending")
 
@@ -211,6 +232,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
