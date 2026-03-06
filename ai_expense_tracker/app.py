@@ -168,8 +168,7 @@ col1.metric("💰 Total Spending", f"₹{total_spent}")
 col2.metric("🧾 Transactions", total_transactions)
 col3.metric("🏆 Top Category", top_category)
 
-if len(df) > 0:
-    st.subheader("📅 Monthly Spending")
+st.subheader("📅 Monthly Spending")
 
 if len(df) > 0:
 
@@ -239,6 +238,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
