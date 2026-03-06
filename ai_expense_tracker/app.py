@@ -141,6 +141,46 @@ if st.button("Save Expense"):
 # -------- LOAD DATA --------
 df = pd.read_sql_query("SELECT * FROM expenses", conn)
 
+total_spent = df["amount"].sum()
+total_transactions = len(df)
+top_category = df.groupby("category")["amount"].sum().idxmax()
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric("💰 Total Spending", f"₹{total_spent}")
+col2.metric("🧾 Transactions", total_transactions)
+col3.metric("🏆 Top Category", top_category)
+
+df["date"] = pd.to_datetime(df["date"])
+monthly = df.groupby(df["date"].dt.month)["amount"].sum()
+
+st.subheader("📅 Monthly Spending")
+
+st.line_chart(monthly)
+
+st.subheader("🔍 Filter Expenses")
+
+selected_category = st.selectbox(
+    "Select Category",
+    ["All"] + list(df["category"].unique())
+)
+
+if selected_category != "All":
+    filtered_df = df[df["category"] == selected_category]
+else:
+    filtered_df = df
+
+st.dataframe(filtered_df)
+
+csv = df.to_csv(index=False)
+
+st.download_button(
+    label="📥 Download Expense Report",
+    data=csv,
+    file_name="expenses_report.csv",
+    mime="text/csv"
+)
+
 # -------- EXPENSE HISTORY --------
 st.header("📜 Expense History")
 st.dataframe(df)
@@ -171,6 +211,7 @@ if len(df) > 0:
 
 else:
     st.info("No expenses recorded yet.")
+
 
 
 
