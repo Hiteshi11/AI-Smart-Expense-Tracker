@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.ocr_reader import get_ocr_reader
+from utils.ocr import get_ocr_reader
 import numpy as np
 import cv2
 import sqlite3
