@@ -3,7 +3,19 @@ import pandas as pd
 import sqlite3
 import matplotlib.pyplot as plt
 
+
 conn = sqlite3.connect("expenses.db", check_same_thread=False)
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS expenses (
+    date TEXT,
+    amount REAL,
+    category TEXT
+)
+""")
+
+conn.commit()
 
 df = pd.read_sql_query("SELECT * FROM expenses", conn)
 
