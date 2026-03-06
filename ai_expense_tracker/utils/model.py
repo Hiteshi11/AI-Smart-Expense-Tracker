@@ -1,23 +1,22 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
+import streamlit as st
 
-data = pd.read_csv("data/expenses.csv")
 
-X = data["text"]
-y = data["category"]
+@st.cache_resource
+def load_model():
 
-vectorizer = TfidfVectorizer()
-X_vector = vectorizer.fit_transform(X)
+    data = pd.read_csv("ai_expense_tracker/data/expenses.csv")
 
-model = LogisticRegression()
-model.fit(X_vector, y)
+    X = data["text"]
+    y = data["category"]
 
-# Ask user input
-user_input = input("Enter expense description: ")
+    vectorizer = TfidfVectorizer()
+    X_vector = vectorizer.fit_transform(X)
 
-test = vectorizer.transform([user_input])
+    model = LogisticRegression()
+    model.fit(X_vector, y)
 
-prediction = model.predict(test)
+    return model, vectorizer
 
-print("Predicted Category:", prediction[0])
