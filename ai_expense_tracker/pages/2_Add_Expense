@@ -5,6 +5,16 @@ from datetime import datetime
 conn = sqlite3.connect("expenses.db", check_same_thread=False)
 cursor = conn.cursor()
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS expenses (
+    date TEXT,
+    amount REAL,
+    category TEXT
+)
+""")
+
+conn.commit()
+
 st.title("➕ Add Expense")
 
 amount = st.number_input("Enter Amount")
