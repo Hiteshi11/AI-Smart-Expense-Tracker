@@ -12,7 +12,7 @@ st.markdown("""
 <style>
 
 .stApp{
-background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+background: linear-gradient(135deg,#141E30,#243B55);
 color:white;
 }
 
@@ -25,28 +25,44 @@ margin-bottom:10px;
 
 .subtitle{
 text-align:center;
-color:#d4d4d4;
+color:#cfcfcf;
 margin-bottom:50px;
 }
 
-.card-button button{
-width:100%;
-height:140px;
-font-size:20px;
-border-radius:18px;
+.card{
 background: rgba(255,255,255,0.08);
-border:1px solid rgba(255,255,255,0.2);
+border-radius:20px;
+padding:40px;
+text-align:center;
 backdrop-filter: blur(10px);
-color:white;
+border:1px solid rgba(255,255,255,0.2);
+box-shadow:0px 8px 30px rgba(0,0,0,0.4);
 transition:0.3s;
-box-shadow:0px 6px 20px rgba(0,0,0,0.4);
 }
 
-.card-button button:hover{
-transform:scale(1.05);
-background: rgba(255,255,255,0.15);
+.card:hover{
+transform:scale(1.06);
+box-shadow:0px 12px 40px rgba(0,0,0,0.6);
 }
 
+.card h2{
+color:white;
+margin-bottom:10px;
+}
+
+.card p{
+color:#d1d1d1;
+}
+
+.open-text{
+margin-top:10px;
+font-size:15px;
+color:#00ffd5;
+}
+
+a{
+text-decoration:none;
+}
 .footer{
 text-align:center;
 margin-top:60px;
@@ -71,22 +87,52 @@ unsafe_allow_html=True
 col1, col2 = st.columns(2)
 
 with col1:
-    if st.button("📊 Dashboard", key="dash"):
-        st.switch_page("pages/Dashboard.py")
+    st.markdown("""
+    <a href="/Dashboard" target="_self">
+    <div class="card">
+        <h2>📊 Dashboard</h2>
+        <p>View your financial overview</p>
+        <div class="open-text">Open →</div>
+    </div>
+    </a>
+    """, unsafe_allow_html=True)
 
 with col2:
-    if st.button("➕ Add Expense", key="add"):
-        st.switch_page("pages/Add_Expense.py")
+    st.markdown("""
+    <a href="/Add_Expense" target="_self">
+    <div class="card">
+        <h2>➕ Add Expense</h2>
+        <p>Add manual expenses quickly</p>
+        <div class="open-text">Open →</div>
+    </div>
+    </a>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
 
 col3, col4 = st.columns(2)
 
 with col3:
-    if st.button("🧾 Upload Receipt", key="upload"):
-        st.switch_page("pages/Upload_Receipt.py")
+    st.markdown("""
+    <a href="/Upload_Receipt" target="_self">
+    <div class="card">
+        <h2>🧾 Upload Receipt</h2>
+        <p>Scan receipts using AI OCR</p>
+        <div class="open-text">Open →</div>
+    </div>
+    </a>
+    """, unsafe_allow_html=True)
 
 with col4:
-    if st.button("📈 Analytics", key="analytics"):
-        st.switch_page("pages/Analytics.py")
+    st.markdown("""
+    <a href="/Analytics" target="_self">
+    <div class="card">
+        <h2>📈 Analytics</h2>
+        <p>Analyze your spending patterns</p>
+        <div class="open-text">Open →</div>
+    </div>
+    </a>
+    """, unsafe_allow_html=True)
 
 # Footer
 st.markdown(
@@ -97,5 +143,6 @@ Built with ❤️
 """,
 unsafe_allow_html=True
 )
+
 
 
