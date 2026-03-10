@@ -11,6 +11,7 @@ st.set_page_config(
 st.markdown("""
 <style>
 
+
 .stApp{
 background: linear-gradient(135deg,#141E30,#243B55);
 color:white;
@@ -32,36 +33,38 @@ margin-bottom:50px;
 .card{
 background: rgba(255,255,255,0.08);
 border-radius:20px;
-padding:40px;
+padding:45px;
 text-align:center;
-backdrop-filter: blur(10px);
-border:1px solid rgba(255,255,255,0.2);
-box-shadow:0px 8px 30px rgba(0,0,0,0.4);
-transition:0.3s;
+backdrop-filter: blur(12px);
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:0px 10px 35px rgba(0,0,0,0.4);
+transition: all 0.35s ease;
 }
 
 .card:hover{
-transform:scale(1.06);
-box-shadow:0px 12px 40px rgba(0,0,0,0.6);
+transform: translateY(-8px) scale(1.04);
+box-shadow:0px 20px 50px rgba(0,0,0,0.6);
 }
 
 .card h2{
 color:white;
-margin-bottom:10px;
+margin-bottom:12px;
+font-size:26px;
 }
 
 .card p{
 color:#d1d1d1;
+font-size:15px;
 }
 
-.open-text{
-margin-top:10px;
-font-size:15px;
-color:#00ffd5;
+.card-icon{
+font-size:40px;
+margin-bottom:15px;
 }
 
 a{
-text-decoration:none;
+text-decoration:none !important;
+color:inherit;
 }
 .footer{
 text-align:center;
@@ -90,9 +93,9 @@ with col1:
     st.markdown("""
     <a href="/Dashboard" target="_self">
     <div class="card">
-        <h2>📊 Dashboard</h2>
+        <div class="card-icon">📊</div>
+        <h2>Dashboard</h2>
         <p>View your financial overview</p>
-        <div class="open-text">Open →</div>
     </div>
     </a>
     """, unsafe_allow_html=True)
@@ -101,9 +104,9 @@ with col2:
     st.markdown("""
     <a href="/Add_Expense" target="_self">
     <div class="card">
-        <h2>➕ Add Expense</h2>
-        <p>Add manual expenses quickly</p>
-        <div class="open-text">Open →</div>
+        <div class="card-icon">➕</div>
+        <h2>Add Expense</h2>
+        <p>Add manual expenses easily</p>
     </div>
     </a>
     """, unsafe_allow_html=True)
@@ -116,9 +119,9 @@ with col3:
     st.markdown("""
     <a href="/Upload_Receipt" target="_self">
     <div class="card">
-        <h2>🧾 Upload Receipt</h2>
+        <div class="card-icon">🧾</div>
+        <h2>Upload Receipt</h2>
         <p>Scan receipts using AI OCR</p>
-        <div class="open-text">Open →</div>
     </div>
     </a>
     """, unsafe_allow_html=True)
@@ -127,9 +130,9 @@ with col4:
     st.markdown("""
     <a href="/Analytics" target="_self">
     <div class="card">
-        <h2>📈 Analytics</h2>
+        <div class="card-icon">📈</div>
+        <h2>Analytics</h2>
         <p>Analyze your spending patterns</p>
-        <div class="open-text">Open →</div>
     </div>
     </a>
     """, unsafe_allow_html=True)
@@ -143,6 +146,7 @@ Built with ❤️
 """,
 unsafe_allow_html=True
 )
+
 
 
 
