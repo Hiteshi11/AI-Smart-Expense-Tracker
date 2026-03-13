@@ -11,10 +11,9 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-
 .stApp{
-background: linear-gradient(135deg,#141E30,#243B55);
-color:white;
+background: linear-gradient(135deg,#f5f7fa,#e4ecf7);
+color:#333;
 }
 
 .title{
@@ -22,43 +21,41 @@ text-align:center;
 font-size:48px;
 font-weight:bold;
 margin-bottom:10px;
+color:#2c3e50;
 }
 
 .subtitle{
 text-align:center;
-color:#cfcfcf;
+color:#6b7c93;
 margin-bottom:50px;
 }
 
 .card{
-background: rgba(255,255,255,0.08);
+background:#ffffff;
 border-radius:20px;
-padding:45px;
+padding:40px;
 text-align:center;
-backdrop-filter: blur(12px);
-border:1px solid rgba(255,255,255,0.15);
-box-shadow:0px 10px 35px rgba(0,0,0,0.4);
-transition: all 0.35s ease;
+box-shadow:0px 10px 25px rgba(0,0,0,0.08);
+transition:0.3s;
+border:1px solid #eef2f7;
 }
 
 .card:hover{
-transform: translateY(-8px) scale(1.04);
-box-shadow:0px 20px 50px rgba(0,0,0,0.6);
+transform: translateY(-6px);
+box-shadow:0px 18px 35px rgba(0,0,0,0.12);
 }
 
 .card h2{
-color:white;
-margin-bottom:12px;
-font-size:26px;
+color:#2c3e50;
+margin-bottom:10px;
 }
 
 .card p{
-color:#d1d1d1;
-font-size:15px;
+color:#6b7c93;
 }
 
 .card-icon{
-font-size:40px;
+font-size:38px;
 margin-bottom:15px;
 }
 
@@ -66,15 +63,9 @@ a{
 text-decoration:none !important;
 color:inherit;
 }
-.footer{
-text-align:center;
-margin-top:60px;
-color:#bdbdbd;
-}
 
 </style>
 """, unsafe_allow_html=True)
-
 
 
 
@@ -146,6 +137,7 @@ Built with ❤️
 """,
 unsafe_allow_html=True
 )
+
 
 
 
