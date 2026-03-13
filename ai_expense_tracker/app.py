@@ -7,75 +7,65 @@ st.set_page_config(
     layout="wide"
 )
 
-
 st.markdown("""
 <style>
 
-/* Main background */
-.stApp {
-    background: #F4C2C2;
+.stApp{
+background: linear-gradient(180deg,#f8fafc,#eef2ff);
+font-family: 'Segoe UI';
 }
 
-/* Sidebar pastel */
-[data-testid="stSidebar"]{
-    background: #f3e8ff;
+/* remove default padding */
+.block-container{
+padding-top:2rem;
 }
 
-/* Title styling */
-.title{
-    text-align:center;
-    font-size:48px;
-    font-weight:bold;
-    color:#f3e8ff;
+/* titles */
+.main-title{
+text-align:center;
+font-size:52px;
+font-weight:700;
+color:#1e293b;
 }
 
-.subtitle{
-    text-align:center;
-    color:#7a7a9d;
-    margin-bottom:40px;
+.sub-title{
+text-align:center;
+color:#64748b;
+margin-bottom:50px;
 }
 
-/* Pastel cards */
+/* card design */
 .card{
-    background:#f8f5ff;
-    border-radius:18px;
-    padding:40px;
-    text-align:center;
-    border:1px solid #e4dcff;
-    box-shadow:0px 8px 20px rgba(0,0,0,0.05);
-    transition:0.3s;
+background:white;
+border-radius:20px;
+padding:35px;
+text-align:center;
+box-shadow:0px 12px 30px rgba(0,0,0,0.08);
+transition:all 0.3s ease;
 }
 
 .card:hover{
-    transform:translateY(-5px);
-    box-shadow:0px 15px 30px rgba(0,0,0,0.1);
+transform:translateY(-8px);
+box-shadow:0px 18px 40px rgba(0,0,0,0.15);
 }
 
-/* Buttons pastel */
-.stButton>button{
-    background:#dcd6ff;
-    color:#f3e8ff;
-    border-radius:12px;
-    border:none;
+/* card icons */
+.card-icon{
+font-size:40px;
+margin-bottom:10px;
 }
 
-.stButton>button:hover{
-    background:#c8c1ff;
+/* card titles */
+.card h2{
+color:#1e293b;
+font-weight:600;
 }
 
-/* Inputs */
-.stTextInput input,
-.stNumberInput input,
-.stSelectbox div{
-    background:#f8f5ff;
+/* card text */
+.card p{
+color:#64748b;
 }
 
-/* Dataframe */
-[data-testid="stDataFrame"]{
-    background:#f8f5ff;
-}
-
-/* Remove link underline */
 a{
 text-decoration:none !important;
 color:inherit;
@@ -87,21 +77,22 @@ color:inherit;
 
 
 # Title
-st.markdown("<div class='title'>💰 AI Smart Expense Tracker</div>", unsafe_allow_html=True)
+st.markdown("<div class='main-title'>AI Smart Expense Tracker</div>", unsafe_allow_html=True)
 
 st.markdown(
-"<div class='subtitle'>AI powered personal finance assistant</div>",
+"<div class='sub-title'>Track, scan and analyze your expenses with AI</div>",
 unsafe_allow_html=True
 )
 # First row
-col1, col2 = st.columns(2)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.markdown("""
     <a href="/Dashboard" target="_self">
     <div class="card">
-        <h2>📊 Dashboard</h2>
-        <p>View financial overview</p>
+        <div class="card-icon">📊</div>
+        <h2>Dashboard</h2>
+        <p>Overview</p>
     </div>
     </a>
     """, unsafe_allow_html=True)
@@ -110,22 +101,20 @@ with col2:
     st.markdown("""
     <a href="/Add_Expense" target="_self">
     <div class="card">
-        <h2>➕ Add Expense</h2>
-        <p>Add manual expenses</p>
+        <div class="card-icon">➕</div>
+        <h2>Add Expense</h2>
+        <p>Manual entry</p>
     </div>
     </a>
     """, unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-col3, col4 = st.columns(2)
 
 with col3:
     st.markdown("""
     <a href="/Upload_Receipt" target="_self">
     <div class="card">
-        <h2>🧾 Upload Receipt</h2>
-        <p>Scan receipts with AI</p>
+        <div class="card-icon">🧾</div>
+        <h2>Scan Receipt</h2>
+        <p>AI OCR</p>
     </div>
     </a>
     """, unsafe_allow_html=True)
@@ -134,8 +123,9 @@ with col4:
     st.markdown("""
     <a href="/Analytics" target="_self">
     <div class="card">
-        <h2>📈 Analytics</h2>
-        <p>Analyze spending patterns</p>
+        <div class="card-icon">📈</div>
+        <h2>Analytics</h2>
+        <p>Insights</p>
     </div>
     </a>
     """, unsafe_allow_html=True)
@@ -149,6 +139,7 @@ Built with ❤️
 """,
 unsafe_allow_html=True
 )
+
 
 
 
