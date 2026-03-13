@@ -26,7 +26,7 @@ st.markdown("""
     text-align:center;
     font-size:48px;
     font-weight:bold;
-    color:#6b5cff;
+    color:#f3e8ff;
 }
 
 .subtitle{
@@ -54,7 +54,7 @@ st.markdown("""
 /* Buttons pastel */
 .stButton>button{
     background:#dcd6ff;
-    color:#3d3a7a;
+    color:#f3e8ff;
     border-radius:12px;
     border:none;
 }
@@ -149,6 +149,7 @@ Built with ❤️
 """,
 unsafe_allow_html=True
 )
+
 
 
 
