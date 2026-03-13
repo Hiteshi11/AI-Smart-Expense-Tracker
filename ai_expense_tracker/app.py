@@ -13,7 +13,7 @@ st.markdown("""
 
 /* Main background */
 .stApp {
-    background: linear-gradient(135deg,#fdfbfb,#ebedee);
+    background: #F4C2C2;
 }
 
 /* Sidebar pastel */
@@ -149,6 +149,7 @@ Built with ❤️
 """,
 unsafe_allow_html=True
 )
+
 
 
 
