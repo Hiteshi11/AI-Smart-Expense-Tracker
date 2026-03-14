@@ -10,79 +10,76 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-.stApp{
-background: linear-gradient(180deg,#f8fafc,#eef2ff);
-font-family: 'Segoe UI';
+/* Main app background */
+.stApp {
+    background-color: #F6F8FB;
 }
 
-/* remove default padding */
-.block-container{
-padding-top:2rem;
+/* Remove large padding */
+.block-container {
+    padding-top: 2rem;
 }
 
-/* titles */
-.main-title{
-text-align:center;
-font-size:52px;
-font-weight:700;
-color:#1e293b;
+/* Title */
+.title {
+    text-align: center;
+    font-size: 44px;
+    font-weight: 700;
+    color: #1F2937;
 }
 
-.sub-title{
-text-align:center;
-color:#64748b;
-margin-bottom:50px;
+/* Subtitle */
+.subtitle {
+    text-align: center;
+    color: #6B7280;
+    margin-bottom: 40px;
 }
 
-/* card design */
-.card{
-background:white;
-border-radius:20px;
-padding:35px;
-text-align:center;
-box-shadow:0px 12px 30px rgba(0,0,0,0.08);
-transition:all 0.3s ease;
+/* Cards */
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
 }
 
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0px 18px 40px rgba(0,0,0,0.15);
+/* Hover */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 12px 30px rgba(0,0,0,0.1);
 }
 
-/* card icons */
-.card-icon{
-font-size:40px;
-margin-bottom:10px;
+/* Icon */
+.card-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
 }
 
-/* card titles */
-.card h2{
-color:#1e293b;
-font-weight:600;
+/* Title */
+.card h3 {
+    color: #1F2937;
 }
 
-/* card text */
-.card p{
-color:#64748b;
+/* Text */
+.card p {
+    color: #6B7280;
 }
 
-a{
-text-decoration:none !important;
-color:inherit;
+/* Remove underline from links */
+a {
+    text-decoration: none !important;
+    color: inherit;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 
-
 # Title
-st.markdown("<div class='main-title'>AI Smart Expense Tracker</div>", unsafe_allow_html=True)
-
-st.markdown(
-"<div class='sub-title'>Track, scan and analyze your expenses with AI</div>",
-unsafe_allow_html=True
-)
+st.markdown("<div class='title'>AI Smart Expense Tracker</div>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>Manage and analyze your expenses with AI</div>", unsafe_allow_html=True)
 # First row
 col1, col2, col3, col4 = st.columns(4)
 
@@ -91,7 +88,7 @@ with col1:
     <a href="/Dashboard" target="_self">
     <div class="card">
         <div class="card-icon">📊</div>
-        <h2>Dashboard</h2>
+        <h3>Dashboard</h3>
         <p>Overview</p>
     </div>
     </a>
@@ -102,7 +99,7 @@ with col2:
     <a href="/Add_Expense" target="_self">
     <div class="card">
         <div class="card-icon">➕</div>
-        <h2>Add Expense</h2>
+        <h3>Add Expense</h3>
         <p>Manual entry</p>
     </div>
     </a>
@@ -113,7 +110,7 @@ with col3:
     <a href="/Upload_Receipt" target="_self">
     <div class="card">
         <div class="card-icon">🧾</div>
-        <h2>Scan Receipt</h2>
+        <h3>Scan Receipt</h3>
         <p>AI OCR</p>
     </div>
     </a>
@@ -124,12 +121,11 @@ with col4:
     <a href="/Analytics" target="_self">
     <div class="card">
         <div class="card-icon">📈</div>
-        <h2>Analytics</h2>
+        <h3>Analytics</h3>
         <p>Insights</p>
     </div>
     </a>
     """, unsafe_allow_html=True)
-
 # Footer
 st.markdown(
 """
@@ -139,6 +135,7 @@ Built with ❤️
 """,
 unsafe_allow_html=True
 )
+
 
 
 
